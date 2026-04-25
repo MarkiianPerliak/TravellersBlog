@@ -1,0 +1,128 @@
+.header {
+    padding-top: 18px;
+    padding-bottom: 18px;
+            @media screen and (min-width: 335px) {
+            
+        }
+    
+    
+        @media screen and (min-width: 704px) {
+
+        }
+    
+        @media screen and (min-width: 1264px) {
+    padding-top: 15px;
+    padding-bottom: 15px;
+        }
+}
+
+.header__nav {
+display: flex;
+}
+
+.header__menuSvg {
+    display: inline;
+}
+
+.header__navLogo {
+    display: flex;
+    align-items: center;
+    margin-right:auto;
+}
+
+.header__logoText {
+font-family: var(--font-family);
+font-weight: 500;
+font-size: 17px;
+line-height: 100%;
+letter-spacing: -0.01em;
+color: var(--color-scheme-2-text);
+
+}
+
+.header__navList {
+display: none;
+            @media screen and (min-width: 335px) {
+            
+        }
+    
+    
+        @media screen and (min-width: 704px) {
+
+        }
+    
+        @media screen and (min-width: 1264px) {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+        }
+}
+
+.header__navBar {
+    width: 32px;
+height: 32px;
+border: 1px solid var(--color-scheme-2-border);
+border-radius: 6px;
+        @media screen and (min-width: 335px) {
+            
+        }
+    
+    
+        @media screen and (min-width: 704px) {
+
+        }
+    
+        @media screen and (min-width: 1264px) {
+            display: none;
+        }
+}
+
+.header__navItemLink {
+font-family: var(--font-family);
+font-weight: 400;
+font-size: 18px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+}
+
+.header__options {
+display: none;
+            @media screen and (min-width: 335px) {
+            
+        }
+    
+    
+        @media screen and (min-width: 704px) {
+
+        }
+    
+        @media screen and (min-width: 1264px) {
+    display: flex;
+    gap: 3px;
+    margin-left: 33px;
+        }
+}
+
+.header__optionLogin {
+border: 1px solid #000;
+border-radius: 6px;
+padding: 4px 10px;
+background: var(--opacity-neutral-darkest-5);
+font-family: var(--font-family);
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+}
+
+.header__optionSignup {
+    border: none;
+border-radius: 6px;
+padding: 4px 10px;
+background: #4A9849;
+font-family: var(--font-family);
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-white);
+}

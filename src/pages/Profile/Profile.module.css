@@ -1,0 +1,121 @@
+.profile__section {
+    padding-top: 48px;
+        padding-bottom: 72px;
+}
+
+.profile__sectionProf {
+    display: flex;
+    align-items: center;
+}
+
+.profile__profImg {
+    border-radius: 100%;
+}
+
+.profile__profInfoName {
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 32px;
+line-height: 130%;
+letter-spacing: -0.01em;
+color: var(--color-scheme-2-text);
+}
+
+.profile__profInfoCount {
+font-family: var(--font-family);
+font-weight: 400;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+}
+
+.profile__sectionOptions {
+    display: flex;
+    margin-top: 48px;
+        margin-bottom: 40px;
+}
+
+.profile__option {
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+    border: 1px solid var(--color-scheme-2-border);
+border-radius: 8px;
+padding: 4px 12px;
+background: var(--color-scheme-2-background);
+}
+
+.green {
+    background: var(--opacity-transparent);
+}
+
+.profile__sectionList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* traveller li */
+
+/* .img {
+border-radius: 100%;
+}
+
+.name {
+font-family: var(--font-family);
+font-weight: 600;
+font-size: 26px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+}
+
+.articles {
+font-family: var(--font-family);
+font-weight: 400;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+}
+
+.view {
+    border: 1px solid var(--color-scheme-2-border);
+border-radius: 6px;
+padding: 6px 12px;
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+color: var(--color-scheme-2-text);
+} */
+
+.profile__loadMore {
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+color: var(--color-white);
+    border: 1px solid var(--color-mantis-dark);
+border-radius: 6px;
+padding: 6px 100px;
+background: var(--color-mantis-dark);
+display: block;
+margin-top: 40px;
+margin-right: auto;
+margin-left: auto;
+
+        @media screen and (min-width: 335px) {
+            
+        }
+    
+    
+        @media screen and (min-width: 704px) {
+padding: 6px 12px;
+        }
+    
+        @media screen and (min-width: 1264px) {
+font-size: 20px;
+        }
+}
