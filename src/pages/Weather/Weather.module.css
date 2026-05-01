@@ -1,0 +1,120 @@
+.weather__cardSection {
+    font-family: "Montserrat", sans-serif;
+}
+
+.weather__cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+}
+
+.card__flex {
+    display: flex;
+    justify-content: center;
+}
+
+.card__flexGap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+}
+
+.weather__card {
+    border-radius: 20px;
+    background: #def2de;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 19px;
+    padding-bottom: 21px;
+}
+
+.weather__city {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+font-size: 14px;
+color: #000;
+}
+
+.weather__country {
+    font-weight: 500;
+font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+color: #000;
+}
+
+.weather__time {
+    font-weight: 500;
+font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+color: #000;
+text-align: center;
+margin-bottom: 16px;
+}
+
+.weather__additional {
+    font-weight: 500;
+font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+color: #000;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.weather__date {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+
+.weather__weekday {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+.weather__emoji {
+    font-size: 120px;
+    text-align: center;
+    margin-bottom: 23px;
+}
+
+.weather__temparature {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+font-size: 32px;
+color: #000;
+text-align: center;
+margin-bottom: 47px;
+}
+
+
+.weather__options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.weather__btnsvg {
+    width: 30px;
+}
+
+.weather__button {
+    margin-left: 22px;
+    margin-right: 21px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+font-size: 15px;
+
+color: white;
+background-color: #4a9849;
+    border-radius: 10px;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 25px;
+padding-right: 25px;
+}
+
+.weather__additionalSection {
+    font-family: "Montserrat", sans-serif;
+}
