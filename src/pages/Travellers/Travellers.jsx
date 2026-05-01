@@ -65,7 +65,7 @@ export const Travellers = () => {
     const [travellers, setTravellers] = useState([])
 
     useEffect(() => {
-            getAPI().then((resultdata) => setTravellers(resultdata))
+            getAPI().then(data => setTravellers(data))
     }, [])
 
 

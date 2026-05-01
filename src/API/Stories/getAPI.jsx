@@ -1,6 +1,10 @@
 export const getAPI = async () => {
     try {
-        return await fetch("https://69749e44265838bbea956cab.mockapi.io/articles").then((result) => result.json())
+        const apiKey = import.meta.env.VITE_mockapikey
+        
+        const data = await axios.get(`https://${apiKey}.mockapi.io/articles`)
+        return data
+
     } catch(error) {
         return error
     }
