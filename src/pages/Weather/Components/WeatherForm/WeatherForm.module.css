@@ -1,0 +1,43 @@
+.weather__formSection {
+    font-family: "Montserrat", sans-serif;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    color: white;
+}
+
+
+.weather__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.weather__location {
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.weather__location::placeholder {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+font-size: 14px;
+color: #878787;
+}
+
+.weather__submit {
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8.5px;
+    padding-bottom: 8.5px;
+    background-color: #4a9849;
+}
