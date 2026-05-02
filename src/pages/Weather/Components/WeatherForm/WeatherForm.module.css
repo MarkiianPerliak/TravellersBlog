@@ -22,6 +22,10 @@
     border: none;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    background: #d9d9d9;
+    padding-top: 12.5px;
+    padding-bottom: 12.5px;
+    padding-left: 29px;
 }
 
 .weather__location::placeholder {
