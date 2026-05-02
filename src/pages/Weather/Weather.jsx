@@ -164,8 +164,10 @@ const addCard = (newWeather) => {
                 <Container>
                     
                     <h1>Saved cards:</h1>
-
-                    <ul className={style.weather__cards}>
+                            {favourite.length === 0 ? (
+                                <h2 style={{ marginTop: "20px" }}>Ви не маєте ніяких улюблених карток</h2>
+                            ) : (
+                        <ul className={style.weather__cards}>
                         {favourite.map(city => {
                             const date = new Date();
                             const fulldate = date.toLocaleDateString("uk-UA");
@@ -248,6 +250,8 @@ const addCard = (newWeather) => {
                             </li>
                         })}
                     </ul>
+                            )}
+
                 </Container>
             </section>
 
