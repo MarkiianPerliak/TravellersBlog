@@ -4,17 +4,22 @@ import { Container } from "../../components/Container/Container.jsx";
 import style from "./Weather.module.css";
 import { useState, useEffect } from 'react';
 import { getAPI } from "../../API/Weather/getAPI.jsx"
-import deleteSvg from './svg/delete.svg';
-import refreshSvg from './svg/refresh.svg';
-import heartSvg from './svg/heart.svg';
+import { Heart, RotateCw, Trash2 } from 'lucide-react';
+import {WeatherForm} from "./Components/WeatherForm/WeatherForm.jsx"
+import { CountryName } from './Components/CountryName/CountryName.jsx';
 
 export const Weather = () => {
 
     const [weather, setWeather] = useState({})
+    const [input, setInput] = useState("")
 
     useEffect(() => {
-        getAPI().then(data => setWeather(data))
-    }, [])
+        getAPI(input).then(data => setWeather(data))
+    }, [input])
+
+    const startAPI = (value) => {
+        setInput(value);
+    };
 
 
     if (!weather) {
@@ -22,25 +27,22 @@ export const Weather = () => {
     }
 
     const date = new Date();
+    const fulldate = date.toLocaleDateString("uk-UA");
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDay();
-    const fulldate = new Date(`${day}.${month}.${year}`).toDateString()
-    const weekDay = date.getDay();
+    const weekDay = date.toLocaleDateString("uk-UA", {weekday:"long"});
     console.log(weather)
     let updMinutes = "";
 
-if (Math.abs(minutes).toString().length === 2) {
-  updMinutes = minutes.toString();
-} else {
-  updMinutes = "0" + minutes;
-}
+    if (Math.abs(minutes).toString().length === 2) {
+        updMinutes = minutes.toString();
+    } else {
+        updMinutes = "0" + minutes;
+    }
 
     const ctemp = Math.round(weather?.main?.temp);
 
-    const mainWeather = "Snow";
+    const mainWeather = "Clear";
 
     let emojicool = "🌈";
 
@@ -88,26 +90,27 @@ if (Math.abs(minutes).toString().length === 2) {
     return (
         <div className='Weather'>
             <Header />
+            <WeatherForm sendData={startAPI}/>
             <section className={style.weather__cardSection}>
                 <Container>
                     <ul className={style.weather__cards}>
                         <li className={style.weather__card}>
                             <div className={style.card__flexGap}>
                                 <h3 className={style.weather__city}>{weather.name}</h3>
-                                <h3 className={style.weather__country}>Ukraine</h3> {/* {weather?.sys?.country} */}
+                                <CountryName countrycode={weather?.sys?.country}></CountryName> {/* {weather?.sys?.country} */}
                             </div>
                             <p className={style.weather__time}>{hours}:{updMinutes}</p>
 
-                            <p className={style.weather__additional}><span className={style.weather__date}>{fulldate}</span> | <span className={style.weather__weekday}>{weather.name}</span></p>
+                            <p className={style.weather__additional}><span className={style.weather__date}>{fulldate}</span> | <span className={style.weather__weekday}>{weekDay}</span></p>
 
                             <p className={style.weather__emoji}>{emojicool}</p>
                             <p className={style.weather__temparature}>{ctemp}°C</p>
 
                             <ul className={style.weather__options}>
-                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><img className={style.weather__btnsvg} src={refreshSvg} alt="refresh" /></button></li>
-                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><img className={style.weather__btnsvg} src={heartSvg} alt="refresh" /></button></li>
+                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><RotateCw size={"30px"}/></button></li>
+                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"}/></button></li>
                                 <li className={style.weather__option}><button className={style.weather__button} type='button'>Більше</button></li>
-                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><img className={style.weather__btnsvg} src={deleteSvg} alt="refresh" /></button></li>
+                                <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><Trash2 size={"30px"}/></button></li>
                             </ul>
                         </li>
                     </ul>
