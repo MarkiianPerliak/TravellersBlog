@@ -1,14 +1,44 @@
-.weather__formSection {
+.weather__formS {
     font-family: "Montserrat", sans-serif;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 100px;
+    padding-bottom: 100px;
     color: white;
+    background-image: url(./hero.png);
 }
 
 
 .weather__list {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.weather__headline {
+    text-align: center;
+    font-weight: 600;
+font-size: 40px;
+margin-bottom: 80px;
+}
+
+.weather__date {
+    width: 164px;
+    font-weight: 500;
+font-size: 24px;
+text-transform: capitalize;
+}
+
+.weather__info {
+    width: 345px;
+    font-weight: 500;
+font-size: 24px;
+color: white;
+}
+
+.weather__line {
+    background-color: white;
+    height: 144px;
+    width: 2px;
 }
 
 .weather__form {
@@ -26,6 +56,7 @@
     padding-top: 12.5px;
     padding-bottom: 12.5px;
     padding-left: 29px;
+    width: 500px;
 }
 
 .weather__location::placeholder {

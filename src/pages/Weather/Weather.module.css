@@ -1,5 +1,6 @@
 .weather__cardSection {
     font-family: "Montserrat", sans-serif;
+    padding-top: 60px;
     padding-bottom: 80px;
 }
 
@@ -118,6 +119,7 @@ padding-right: 25px;
 
 .weather__additionalSection {
     font-family: "Montserrat", sans-serif;
+    margin-bottom: 80px;
 }
 
 

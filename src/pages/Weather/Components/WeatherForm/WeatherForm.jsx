@@ -13,15 +13,20 @@ const handleClick = (e) => {
     sendData(city);
   };
 
+const d = new Date(),
+o = n => (n%10===1 && n%100!==11 ? '-ше'
+      : [2,3,4].includes(n%10) && ![12,13,14].includes(n%100) ? '-ге'
+      : '-те');
 
   return (
     <section className={style.weather__formS}>
         <Container>
             <h1 className={style.weather__headline}>Погода</h1>
             <ul className={style.weather__list}>
-                <li className={style.weather__item}><p className={style.weather__headline}>Створіть свій особистий список улюблених міст і завжди будьте в курсі погоди.</p></li>
+                <li className={style.weather__item}><p className={style.weather__info}>Створіть свій особистий список улюблених міст і завжди будьте в курсі погоди.</p></li>
                 <li className={style.weather__item}><div className={style.weather__line}></div></li>
-                <li className={style.weather__item}><p className={style.weather__headline}>Створіть свій особистий список улюблених міст і завжди будьте в курсі погоди.</p></li>
+                <li className={style.weather__item}><p className={style.weather__date}>{`${d.toLocaleString('uk-UA',{month:'long',year:'numeric'})}
+${d.toLocaleString('uk-UA',{weekday:'long'})}, ${d.getDate()}${o(d.getDate())}`}</p></li>
             </ul>
             
             <form className={style.weather__form} onSubmit={handleClick} action="">
