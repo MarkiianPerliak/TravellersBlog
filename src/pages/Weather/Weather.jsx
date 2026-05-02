@@ -11,9 +11,24 @@ import { CountryName } from './Components/CountryName/CountryName.jsx';
 export const Weather = () => {
 
     const [weather, setWeather] = useState([])
+    const [favourite, setFavourite] = useState([])
     const [selectedW, setSelectedW] = useState({})
     const [visibility, setVisibility] = useState(false)
     const [input, setInput] = useState("")
+
+useEffect(() => {
+    if (localStorage.getItem("Favourites") === null) {
+        localStorage.setItem("Favourites", JSON.stringify([]));
+    } else {
+    const stored = JSON.parse(localStorage.getItem("Favourites"));
+
+    stored.forEach(weather => {
+        getAPI(weather).then(data => {
+            setFavourites(data);
+        });
+    });
+    }
+}, []);
 
     useEffect(() => {
         if (!input) return;
@@ -25,17 +40,42 @@ export const Weather = () => {
     };
 
 
-    const addCard = (newWeather) => {
-        setWeather(prev => {
-            const exists = prev.some(city => city.id === newWeather.id);
+const addCard = (newWeather) => {
+    setWeather(prev => {
+        const filtered = prev.filter(city => city.sys.id !== newWeather.sys.id);
+        return [...filtered, newWeather];
+    });
+};
+
+    const setFavourites = (newFavourite) => {
+        setFavourite(prev => {
+            const exists = prev.some(city => city.sys.id === newFavourite.sys.id);
             if (exists) return prev;
-            return [...prev, newWeather];
+            return [...prev, newFavourite];
         });
     };
 
     const reloadInfo = (data) => {
         const name = city.name;
         getAPI(name).then(data => addCard(data))
+    }
+
+    const favouriteCard = (data, text) => {
+        const existing = JSON.parse(localStorage.getItem("Favourites")) || [];
+
+        existing.push(data);
+
+        localStorage.setItem("Favourites", JSON.stringify(existing));
+
+        // if (text === "favourite") {
+        //     const updated = existing.filter(item => item !== data.name);
+        //     localStorage.setItem("Favourites", JSON.stringify(updated));
+        //     setFavourite(prev => prev.filter(weathero => weathero.sys.id !== data));
+        // }
+    }
+
+    const deleteCard = (data) => {
+        setWeather(prev => prev.filter(weathero => weathero.sys.id !== data));
     }
 
     const seeMore = (data, text, emoji) => {
@@ -51,6 +91,8 @@ export const Weather = () => {
     if (!weather) {
         return <div>Loading</div>
     }
+
+    console.log(weather)
 
     // const date = new Date();
     // const fulldate = date.toLocaleDateString("uk-UA");
@@ -117,8 +159,103 @@ export const Weather = () => {
         <div className='Weather'>
             <Header />
             <WeatherForm sendData={startAPI} />
+
+            <section className={style.weather__fcardSection}>
+                <Container>
+                    
+                    <h1>Saved cards:</h1>
+
+                    <ul className={style.weather__cards}>
+                        {favourite.map(city => {
+                            const date = new Date();
+                            const fulldate = date.toLocaleDateString("uk-UA");
+                            const hours = date.getHours();
+                            const minutes = date.getMinutes();
+                            const weekDay = date.toLocaleDateString("uk-UA", { weekday: "long" });
+                            console.log(weather)
+                            let updMinutes = "";
+
+                            if (Math.abs(minutes).toString().length === 2) {
+                                updMinutes = minutes.toString();
+                            } else {
+                                updMinutes = "0" + minutes;
+                            }
+
+
+                            const mainWeather = "Clear";
+
+                            let emojicool = "🌈";
+
+                            if (mainWeather === "Rain")
+                                emojicool = "🌧️";
+                            else if (mainWeather === "Clouds")
+                                emojicool = "☁️";
+                            else if (mainWeather === "Clear")
+                                emojicool = "☀️";
+                            else if (mainWeather === "Snow")
+                                emojicool = "🌨️";
+                            else if (mainWeather === "Drizzle")
+                                emojicool = "🌦️";
+                            else if (mainWeather === "Thunderstorm")
+                                emojicool = "🌩️";
+                            else if (["Mist", "Fog", "Haze"].includes(mainWeather))
+                                emojicool = "🌫️";
+
+
+                            let visibility = city.visibility;
+
+                            let visibilityText = "";
+                            let visibilityEmoji = "";
+
+                            if (visibility >= 10000) {
+                                visibilityText = "Необмежена";
+                                visibilityEmoji = "👁️";
+                            } else if (visibility < 500) {
+                                visibilityText = "Дуже обмежена";
+                                visibilityEmoji = "🙈";
+                            } else if (visibility < 1000) {
+                                visibilityText = "Обмежена";
+                                visibilityEmoji = "😶‍🌫️";
+                            } else if (visibility < 5000) {
+                                visibilityText = "Середня";
+                                visibilityEmoji = "🌫️";
+                            } else {
+                                visibilityText = "Добра";
+                                visibilityEmoji = "👀";
+                            }
+
+
+                            const ctemp = Math.round(city?.main?.temp);
+
+                            return <li className={style.weather__card}>
+                                <div className={style.card__flexGap}>
+                                    <h3 className={style.weather__city}>{city.name}</h3>
+                                    <CountryName countrycode={city?.sys?.country}></CountryName>
+                                </div>
+                                <p className={style.weather__time}>{hours}:{updMinutes}</p>
+
+                                <p className={style.weather__additional}><span className={style.weather__date}>{fulldate}</span> | <span className={style.weather__weekday}>{weekDay}</span></p>
+
+                                <p className={style.weather__emoji}>{emojicool}</p>
+                                <p className={style.weather__temparature}>{ctemp}°C</p>
+
+                                <ul className={style.weather__options}>
+                                    <li className={style.weather__option}><button onClick={() => reloadInfo(city)} className={style.weather__imgbutton} type='button'><RotateCw size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => favouriteCard(city.name, "favourite")} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__button} type='button'>Більше</button></li>
+                                    <li className={style.weather__option}><button onClick={() => deleteCard(city.sys.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
+                                </ul>
+                            </li>
+                        })}
+                    </ul>
+                </Container>
+            </section>
+
+
             <section className={style.weather__cardSection}>
                 <Container>
+
+                    <h1>New cards:</h1>
                     <ul className={style.weather__cards}>
                         {weather.map(city => {
                             const date = new Date();
@@ -195,9 +332,9 @@ export const Weather = () => {
 
                                 <ul className={style.weather__options}>
                                     <li className={style.weather__option}><button onClick={() => reloadInfo(city)} className={style.weather__imgbutton} type='button'><RotateCw size={"30px"} /></button></li>
-                                    <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => favouriteCard(city.name)} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
                                     <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__button} type='button'>Більше</button></li>
-                                    <li className={style.weather__option}><button className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => deleteCard(city.sys.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
                                 </ul>
                             </li>
                         })}

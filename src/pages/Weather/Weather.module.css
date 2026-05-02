@@ -4,6 +4,11 @@
     padding-bottom: 80px;
 }
 
+.weather__fcardSection {
+    font-family: "Montserrat", sans-serif;
+    padding-top: 60px;
+}
+
 .weather__cards {
     display: flex;
     justify-content: center;
