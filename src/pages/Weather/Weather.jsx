@@ -16,6 +16,7 @@ export const Weather = () => {
     const [visibility, setVisibility] = useState(false)
     const [input, setInput] = useState("")
 
+
 useEffect(() => {
     if (localStorage.getItem("Favourites") === null) {
         localStorage.setItem("Favourites", JSON.stringify([]));
@@ -30,6 +31,14 @@ useEffect(() => {
     }
 }, []);
 
+
+useEffect(() => {
+    console.log(weather)
+}, [weather])
+
+
+
+
     useEffect(() => {
         if (!input) return;
         getAPI(input).then(data => addCard(data))
@@ -40,43 +49,66 @@ useEffect(() => {
     };
 
 
+
+
+
 const addCard = (newWeather) => {
     setWeather(prev => {
-        const filtered = prev.filter(city => city.sys.id !== newWeather.sys.id);
+        const filtered = prev.filter(city => city.id !== newWeather.id);
         return [...filtered, newWeather];
     });
 };
 
+
+
     const setFavourites = (newFavourite) => {
         setFavourite(prev => {
-            const exists = prev.some(city => city.sys.id === newFavourite.sys.id);
+            const exists = prev.some(city => city.id === newFavourite.id);
             if (exists) return prev;
             return [...prev, newFavourite];
         });
     };
+
+
+
 
     const reloadInfo = (data) => {
         const name = city.name;
         getAPI(name).then(data => addCard(data))
     }
 
+
+
     const favouriteCard = (data, text) => {
-        const existing = JSON.parse(localStorage.getItem("Favourites")) || [];
+    const existing = JSON.parse(localStorage.getItem("Favourites")) || [];
 
-        existing.push(data);
+    if (text === "favourite") {
+        const updated = existing.filter(item => item.id !== data.id);
 
-        localStorage.setItem("Favourites", JSON.stringify(existing));
+        localStorage.setItem("Favourites", JSON.stringify(updated));
 
-        // if (text === "favourite") {
-        //     const updated = existing.filter(item => item !== data.name);
-        //     localStorage.setItem("Favourites", JSON.stringify(updated));
-        //     setFavourite(prev => prev.filter(weathero => weathero.sys.id !== data));
-        // }
+        setFavourite(prev =>
+            prev.filter(item => item.id !== data.id)
+        );
+
+        return;
     }
 
-    const deleteCard = (data) => {
-        setWeather(prev => prev.filter(weathero => weathero.sys.id !== data));
+    const exists = existing.some(item => item.id === data.id);
+
+    if (!exists) {
+        const updated = [...existing, data];
+        localStorage.setItem("Favourites", JSON.stringify(updated));
     }
+    }
+
+
+
+    const deleteCard = (data, text) => {
+        setWeather(prev => prev.filter(weathero => weathero.id !== data));
+    }
+
+
 
     const seeMore = (data, text, emoji) => {
         setVisibility(true)
@@ -86,6 +118,8 @@ const addCard = (newWeather) => {
             emoji: emoji
         });
     }
+
+
 
 
     if (!weather) {
@@ -244,8 +278,8 @@ const addCard = (newWeather) => {
                                 <ul className={style.weather__options}>
                                     <li className={style.weather__option}><button onClick={() => reloadInfo(city)} className={style.weather__imgbutton} type='button'><RotateCw size={"30px"} /></button></li>
                                     <li className={style.weather__option}><button onClick={() => favouriteCard(city.name, "favourite")} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
-                                    <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__button} type='button'>Більше</button></li>
-                                    <li className={style.weather__option}><button onClick={() => deleteCard(city.sys.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__buttonf} type='button'>Більше</button></li>
+                                    {/* <li className={style.weather__option}><button onClick={() => deleteCard(city.id, "favourite")} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li> */}
                                 </ul>
                             </li>
                         })}
@@ -338,7 +372,7 @@ const addCard = (newWeather) => {
                                     <li className={style.weather__option}><button onClick={() => reloadInfo(city)} className={style.weather__imgbutton} type='button'><RotateCw size={"30px"} /></button></li>
                                     <li className={style.weather__option}><button onClick={() => favouriteCard(city.name)} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
                                     <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__button} type='button'>Більше</button></li>
-                                    <li className={style.weather__option}><button onClick={() => deleteCard(city.sys.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => deleteCard(city.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
                                 </ul>
                             </li>
                         })}
