@@ -6,6 +6,7 @@ import { useState, useEffect, use } from 'react';
 import { getAPI } from "../../API/Weather/getAPI.jsx"
 import { CloudDrizzle, Gauge, Heart, RotateCw, ThermometerSnowflake, ThermometerSun, Trash2, Wind } from 'lucide-react';
 import { WeatherForm } from "./Components/WeatherForm/WeatherForm.jsx"
+import { News } from "./Components/News/News.jsx"
 import { CountryName } from './Components/CountryName/CountryName.jsx';
 
 export const Weather = () => {
@@ -32,9 +33,9 @@ useEffect(() => {
 }, []);
 
 
-useEffect(() => {
-    console.log(weather)
-}, [weather])
+// useEffect(() => {
+//     console.log(weather)
+// }, [weather])
 
 
 
@@ -62,6 +63,7 @@ const addCard = (newWeather) => {
 
 
     const setFavourites = (newFavourite) => {
+        console.log(newFavourite)
         setFavourite(prev => {
             const exists = prev.some(city => city.id === newFavourite.id);
             if (exists) return prev;
@@ -80,26 +82,27 @@ const addCard = (newWeather) => {
 
 
     const favouriteCard = (data, text) => {
-    const existing = JSON.parse(localStorage.getItem("Favourites")) || [];
+        console.log(data)
+        const existing = JSON.parse(localStorage.getItem("Favourites")) || [];
 
-    if (text === "favourite") {
-        const updated = existing.filter(item => item.id !== data.id);
+        if (text === "favourite") {
+            const updated = existing.filter(item => item !== data);
 
-        localStorage.setItem("Favourites", JSON.stringify(updated));
+            localStorage.setItem("Favourites", JSON.stringify(updated));
 
-        setFavourite(prev =>
-            prev.filter(item => item.id !== data.id)
-        );
+            setFavourite(prev =>
+                prev.filter(item => item !== data)
+            );
 
-        return;
-    }
+            return;
+        }
 
-    const exists = existing.some(item => item.id === data.id);
+        const exists = existing.some(item => item === data);
 
-    if (!exists) {
-        const updated = [...existing, data];
-        localStorage.setItem("Favourites", JSON.stringify(updated));
-    }
+        if (!exists) {
+            const updated = [...existing, data];
+            localStorage.setItem("Favourites", JSON.stringify(updated));
+        }
     }
 
 
@@ -197,9 +200,9 @@ const addCard = (newWeather) => {
             <section className={style.weather__fcardSection}>
                 <Container>
                     
-                    <h1>Saved cards:</h1>
+                    <h1 style={{ marginBottom: "20px" }}>Saved cards:</h1>
                             {favourite.length === 0 ? (
-                                <h2 style={{ marginTop: "20px" }}>Ви не маєте ніяких улюблених карток</h2>
+                                <h2>Ви не маєте ніяких улюблених карток</h2>
                             ) : (
                         <ul className={style.weather__cards}>
                         {favourite.map(city => {
@@ -293,7 +296,7 @@ const addCard = (newWeather) => {
             <section className={style.weather__cardSection}>
                 <Container>
 
-                    <h1>New cards:</h1>
+                    <h1 style={{ marginBottom: "20px" }}>New cards:</h1>
                     <ul className={style.weather__cards}>
                         {weather.map(city => {
                             const date = new Date();
@@ -370,7 +373,7 @@ const addCard = (newWeather) => {
 
                                 <ul className={style.weather__options}>
                                     <li className={style.weather__option}><button onClick={() => reloadInfo(city)} className={style.weather__imgbutton} type='button'><RotateCw size={"30px"} /></button></li>
-                                    <li className={style.weather__option}><button onClick={() => favouriteCard(city.name)} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
+                                    <li className={style.weather__option}><button onClick={() => favouriteCard(city.name, "text")} className={style.weather__imgbutton} type='button'><Heart color='red' size={"30px"} /></button></li>
                                     <li className={style.weather__option}><button onClick={() => seeMore(city, visibilityText, visibilityEmoji)} className={style.weather__button} type='button'>Більше</button></li>
                                     <li className={style.weather__option}><button onClick={() => deleteCard(city.id)} className={style.weather__imgbutton} type='button'><Trash2 size={"30px"} /></button></li>
                                 </ul>
@@ -448,6 +451,8 @@ const addCard = (newWeather) => {
                     </ul>
                 </Container>
             </section>
+
+            <News city={selectedW}/>
 
             <Footer />
         </div>

@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const getAPI = async () => {
     try {
         const apiKey = import.meta.env.VITE_mockapikey
