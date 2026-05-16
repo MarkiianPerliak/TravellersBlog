@@ -1,18 +1,31 @@
+.news {
+    padding-bottom: 84px;
+}
+
 .news__image {
     border-radius: 10px;
 width: 270px;
 height: 208px;
 margin-bottom: 25px;
+background-image: url(https://placehold.co/270x208?text=Картинка+Відсутня);
 }
 
 .news__list {
     display: flex;
-    gap: 20px;
-    row-gap: 20px;
-    justify-content: center;
+    /* gap: 20px; */
+    row-gap: 40px;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .news__title {
     width: 270px;
+}
+
+.news__more {
+    border-radius: 10px;
+padding: 10px 30px;
+color: white;
+background-color: #4a9849;
+margin-top: 40px;
 }

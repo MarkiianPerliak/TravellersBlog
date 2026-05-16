@@ -8,6 +8,8 @@ import { CloudDrizzle, Gauge, Heart, RotateCw, ThermometerSnowflake, Thermometer
 import { WeatherForm } from "./Components/WeatherForm/WeatherForm.jsx"
 import { News } from "./Components/News/News.jsx"
 import { CountryName } from './Components/CountryName/CountryName.jsx';
+import { Slider } from './Components/Slider/Slider.jsx';
+
 
 export const Weather = () => {
 
@@ -453,7 +455,7 @@ const addCard = (newWeather) => {
             </section>
 
             <News city={selectedW}/>
-
+            <Slider />
             <Footer />
         </div>
     )

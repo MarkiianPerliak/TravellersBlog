@@ -1,0 +1,8 @@
+.slider {
+    padding-bottom: 48px;
+}
+
+.slider__image {
+    height: 300px;
+    width: 400px;
+}
