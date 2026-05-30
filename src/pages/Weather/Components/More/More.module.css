@@ -1,0 +1,67 @@
+.cards__infos {
+    border-radius: 20px;
+    background: #def2de;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 58px;
+    row-gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 77px;
+    padding-right: 77px;
+    margin-bottom: 100px;
+}
+
+.cards__info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #8dd18c;
+    border-radius: 10px;
+    height: 217px;
+    width: 290px;
+    padding-top: 24px;
+    padding-bottom: 20px;
+    /* padding-right: 98px;
+    padding-left: 98px; */
+}
+
+.cards__info p {
+    color: white;
+}
+
+.cards__info h3 {
+    color: white;
+}
+
+.cards__infoHeadline {
+font-weight: 500;
+font-size: 16px;
+text-align: center;
+margin-bottom: 14px;
+}
+
+.cards__infoAnswear {
+    font-weight: 500;
+font-size: 32px;
+text-align: center;
+margin-bottom: 22px;
+}
+
+.cards__infoAnswearSpecial {
+        font-weight: 500;
+font-size: 32px;
+text-align: center;
+}
+
+.cards__infoEmoji {
+    font-size: 85px;
+}
+
+
+.cards__bigHeadline {
+    color: black;
+}

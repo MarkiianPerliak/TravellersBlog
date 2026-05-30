@@ -14,6 +14,9 @@ export const Slider = () => {
     useEffect(() => {
         getAPI().then(data => setImg(data))
     }, [])
+
+
+
     return (
         <div className={style.slider}>
             <Container>
@@ -22,14 +25,19 @@ export const Slider = () => {
             <Swiper
                 modules={[Autoplay, EffectCoverflow]}
                 spaceBetween={50}
-                slidesPerView={3}
+                slidesPerView={1}
+                effect={"coverflow"}
+                autoplay={true}
+                breakpoints={{704: {slidesPerView:2}, 1264: {slidesPerView:3}}}
+                coverflowEffect={
+                    {rotate: 5}
+                }
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {img.map(item => {
                     return <SwiperSlide><img className={style.slider__image} src={item.largeImageURL} alt="" /></SwiperSlide>
                 })}
-                ...
             </Swiper>
             </Container>
         </div>
