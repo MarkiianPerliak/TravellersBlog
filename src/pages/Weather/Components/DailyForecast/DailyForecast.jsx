@@ -5,33 +5,26 @@ import style from "./DailyForecast.module.css";
 import { Container } from "../../../../components/Container/Container.jsx";
 import { Line } from 'react-chartjs-2';
 
-export const DailyForecast = (selectedW) => {
-    const [hourly, setHourly] = useState([])
+export const DailyForecast = ({selectedW}) => {
+    const [daily, setDaily] = useState([])
     useEffect(() => {
-        getAPIN(selectedW.name)
+        getAPIN(selectedW.name).then(data => setDaily(data))
     }, [])
+
+    useEffect(() => {
+        console.log(daily.list)
+    }, [daily])
 
   return (
     <section>
         <Container>
-            <Line
-                // datasetIdKey=""
+            {/* <Line
+                datasetIdKey=""
                 data={{
-                    labels: ['Jun', 'Jul', 'Aug', 'Jun', 'Jul', 'Aug', 'Jul', 'Aug'],
-                    datasets: [
-                    {
-                        id: 1,
-                        label: '',
-                        data: [5, 6, 7],
-                    },
-                    {
-                        id: 2,
-                        label: '',
-                        data: [3, 2, 1],
-                    },
-                    ],
+                    labels: ['3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '0:00'],
+                    datasets: [daily.list]
                 }}
-                />
+                /> */}
         </Container>
     </section>
   )

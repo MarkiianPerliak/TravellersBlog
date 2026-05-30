@@ -7,7 +7,7 @@ export const getAPIN = async (city) => {
         
         const data = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`)
         const weatherDate = data.data
-        console.log(weatherDate)
+        return weatherDate
     } catch(error) {
         return error
     }

@@ -58,7 +58,7 @@ export const More = ({visibility, selectedW}) => {
                 </Container>
             </section>
 
-            <DailyForecast />
+            <DailyForecast selectedW={selectedW}/>
             </div>
   )
 }
