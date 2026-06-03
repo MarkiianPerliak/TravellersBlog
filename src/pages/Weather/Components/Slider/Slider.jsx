@@ -32,8 +32,6 @@ export const Slider = () => {
                 coverflowEffect={
                     {rotate: 5}
                 }
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
             >
                 {img.map(item => {
                     return <SwiperSlide><img className={style.slider__image} src={item.largeImageURL} alt="" /></SwiperSlide>
