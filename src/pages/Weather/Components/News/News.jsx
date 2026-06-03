@@ -35,7 +35,7 @@ export const News = ({ city }) => {
     return (
         <div className={style.news}>
             <Container>
-            <h1 className={style.news__headline}></h1>
+            <h1 className={style.news__headline}>Новини:</h1>
 
             <ul className={style.news__list}>
 

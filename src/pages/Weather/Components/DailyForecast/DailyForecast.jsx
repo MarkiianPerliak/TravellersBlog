@@ -46,7 +46,7 @@ export const DailyForecast = ({ selectedW }) => {
     const [rdyarray, setRdyarray] = useState([])
     useEffect(() => {
         getAPIN(selectedW.name).then(data => setDaily(data.list.slice(0, 8)))
-    }, [])
+    }, [selectedW])
     useEffect(() => {
         console.log(daily.map(temp => { return temp.main.temp }))
         console.log(daily.map(temp => {
