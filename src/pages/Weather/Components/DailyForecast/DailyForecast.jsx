@@ -63,6 +63,7 @@ export const DailyForecast = ({ selectedW }) => {
     return (
         <section className={style.dailyForecast}>
             <Container>
+                <h1 className={style.dailyForecast__headline}>Погода на наступні 24 години</h1>
                 <Line
                     options={options}
                     datasetIdKey="id"

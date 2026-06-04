@@ -1,4 +1,19 @@
 .dailyForecast {
     border-radius: 20px;
     background: #def2de;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: min-content;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.dailyForecast__headline {
+    
+font-weight: 600;
+font-size: 20px;
+color: #000;
+margin-bottom: 22px;
 }
